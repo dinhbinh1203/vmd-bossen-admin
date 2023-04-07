@@ -1,4 +1,4 @@
-import { Layout } from 'antd'
+import { Layout, theme } from 'antd'
 import dayjs from 'dayjs'
 // import DefaultHeader from 'layouts/DefaultHeader'
 // import DefaultNavigate from 'layouts/DefaultNavigate'
@@ -8,6 +8,8 @@ import { useWindowSize } from 'usehooks-ts'
 import Navigation from './Navigation'
 
 const { Header, Sider, Content, Footer } = Layout
+
+const { useToken } = theme
 
 export default function MainLayout() {
   const { width } = useWindowSize()
@@ -21,6 +23,8 @@ export default function MainLayout() {
       setCollapsed(false)
     }
   }, [width])
+
+  const { token } = useToken()
 
   return (
     <Layout className="min-h-screen flex-row">
@@ -40,14 +44,19 @@ export default function MainLayout() {
         <Navigation collapsed={collapsed} />
       </Sider>
       <Layout>
-        <Header>{/* <DefaultHeader /> */}</Header>
+        <Header
+          className="!h-[60px] fixed inset-0 z-10"
+          style={{ backgroundColor: token.colorPrimary }}
+        >
+          {/* <DefaultHeader /> */}
+        </Header>
         <Content className="p-4">
           <Suspense fallback={'Loading...'}>
             <Outlet />
           </Suspense>
         </Content>
         <Footer className="text-center !py-4">
-          Copyright &copy; {year} Powered by Estuary Solutions, version {import.meta.env.BUILD}
+          Copyright &copy; {year} Powered by Estuary Solutions
         </Footer>
       </Layout>
     </Layout>

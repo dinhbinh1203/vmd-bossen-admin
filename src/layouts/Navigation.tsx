@@ -54,7 +54,9 @@ const DefaultNavigate = ({ collapsed }: Props) => {
         flexGrow: 1,
         overflowY: 'auto',
         overflowX: 'hidden',
-        paddingTop: 64
+        paddingTop: 64,
+        userSelect: 'none',
+        height: '100%'
       }}
       items={navs ?? undefined}
     />
