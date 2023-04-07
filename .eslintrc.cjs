@@ -41,6 +41,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     // Cảnh báo khi thẻ <a target='_blank'> mà không có rel="noreferrer"
     'react/jsx-no-target-blank': 'warn',
+    'react/prop-types': 'off',
     // Tăng cường một số rule prettier (copy từ file .prettierrc qua)
     'prettier/prettier': [
       'warn',
@@ -53,7 +54,8 @@ module.exports = {
         useTabs: false,
         singleQuote: true,
         printWidth: 100,
-        jsxSingleQuote: false
+        jsxSingleQuote: false,
+        bracketSpacing: true
       }
     ]
   }
