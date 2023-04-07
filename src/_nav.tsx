@@ -7,38 +7,33 @@ import { cloneDeep } from 'lodash'
 const _nav = [
   {
     key: '/users',
-    action_key: 'VIEW_USER',
     label: 'Quản lý người dùng',
-    title: 'Quản lý người dùng',
     display: 1,
     icon: <AiOutlineUser />,
-    component: () => <UserList />,
+    component: <UserList />,
     children: [
       {
         key: '/users/add',
-        action_key: 'ADD_USER',
         label: 'Thêm người dùng',
-        title: 'Thêm người dùng',
-        component: () => <UserAdd />
+        component: <UserAdd />,
+        display: 1
       },
       {
         key: '/users/:id',
-        action_key: 'VIEW_USER_DETAIL',
         label: 'Chi tiết người dùng',
-        title: 'Chi tiết người dùng',
-        component: () => <UserDetail />
+        component: <UserDetail />,
+        display: 1
       }
     ]
   }
 ]
 
-export const getNavigation = ({ navs = cloneDeep([]), isRoute = false } = {}) => {
+export const getNavigation = ({ navs = cloneDeep(_nav), isRoute = false } = {}) => {
   return navs.reduce((result: any, nav: any, index) => {
     const { children } = nav
-    const isDisplayForNav = !!nav.display // display in left navigation
-    if (isDisplayForNav || isRoute) result.push(nav)
+    if (Boolean(nav.display) || isRoute) result.push(nav)
     if (children?.length > 0) {
-      const childNavs = getNavigation({ navs: children, isRoute }) ?? [] // recursive children
+      const childNavs = getNavigation({ navs: children, isRoute }) ?? []
       if (isRoute) {
         if (!nav.component) result.splice(result.length - 1)
         result = [...result, ...childNavs]
