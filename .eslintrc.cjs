@@ -2,6 +2,11 @@
 const path = require('path')
 
 module.exports = {
+  env: {
+    node: true,
+    es6: true,
+    browser: true
+  },
   extends: [
     // Chúng ta sẽ dùng các rule mặc định từ các plugin mà chúng ta đã cài.
     'eslint:recommended',
@@ -32,9 +37,6 @@ module.exports = {
         project: path.resolve(__dirname, './tsconfig.json')
       }
     }
-  },
-  env: {
-    node: true
   },
   rules: {
     // Tắt rule yêu cầu import React trong file jsx

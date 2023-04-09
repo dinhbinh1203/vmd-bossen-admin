@@ -8,11 +8,10 @@ type Props = {
 }
 
 const DefaultNavigate = ({ collapsed }: Props) => {
-  const [selectedKeys, setSelectedKeys] = useState([''])
-  const [openKeys, setOpenKeys] = useState([''])
   const location = useLocation()
   const navs = useNav()
-  console.log('🚀 ~ DefaultNavigate ~ navs:', navs)
+  const [selectedKeys, setSelectedKeys] = useState([''])
+  const [openKeys, setOpenKeys] = useState([''])
 
   const getKeysFromPathname = (pathname: string, isSelectedKey?: boolean) => {
     const pathArray = pathname?.substring(1)?.split?.('/')
