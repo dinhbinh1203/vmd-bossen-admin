@@ -1,14 +1,14 @@
 import { createContext, ReactNode } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
-import { getAccessToken, getUserFromStorage } from '~/utils'
+import { getAuthFromStorage } from '~/utils'
 
 type Props = {
   children: ReactNode
 }
 
 type AuthType = {
-  token: string | null
-  user: object | null
+  token?: string | null
+  user?: object | null
 }
 
 type AuthContextType = AuthType & { isLoggedIn: boolean; onChange: (data: AuthType) => void }
@@ -16,10 +16,7 @@ type AuthContextType = AuthType & { isLoggedIn: boolean; onChange: (data: AuthTy
 export const AuthContext = createContext<AuthContextType | null>(null)
 
 export default function AuthProvider({ children }: Props) {
-  const [auth, setAuth] = useLocalStorage('auth', {
-    token: getAccessToken(),
-    user: getUserFromStorage()
-  })
+  const [auth, setAuth] = useLocalStorage('auth', getAuthFromStorage())
 
   const handleAuthChange = (data: AuthType) => {
     setAuth({
