@@ -8,18 +8,23 @@ export default function SystemRoutes() {
   const navs = useNav(true)
 
   const renderRoutes = () => {
-    return navs.map(({ key, component }: any) => (
-      <Route key={key} path={key} element={<AuthGuard>{component}</AuthGuard>} />
-    ))
+    return navs.map(({ key, component }: any) => <Route key={key} path={key} element={component} />)
   }
 
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route
+        path="/"
+        element={
+          <AuthGuard>
+            <MainLayout />
+          </AuthGuard>
+        }
+      >
         {renderRoutes()}
       </Route>
       <Route
-        path="login"
+        path="/login"
         element={
           <GuestGuard>
             <Login />

@@ -17,5 +17,5 @@ export default function AuthGuard({ children }: Props) {
     }
   }, [isLoggedIn, navigate])
 
-  return children
+  return isLoggedIn ? children : null
 }
